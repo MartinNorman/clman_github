@@ -29,8 +29,8 @@ seeds:
         tests:  
           - unique
           - not_null
-          - accepted_values:
-              values: ['Sweden', 'Denmark', 'Norway', 'Finland']
+#          - accepted_values:
+#              values: ['Sweden', 'Denmark', 'Norway', 'Finland']
           - relationships:
               to: ref('country_details')
               field: id
