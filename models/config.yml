@@ -1,0 +1,52 @@
+sources:
+  - name: clman_github
+    database: clman  
+    schema: dbt_mnorman
+    tables:
+      - name: country
+      - name: country_details
+      - name: changes
+
+
+#models:
+#  - name: my_first_dbt_model
+#    description: "A starter dbt model"
+#    columns:
+#      - name: id
+#        description: "The primary key for this table"
+#        tests:
+#          - unique
+#          - not_null
+
+
+#models:
+seeds:
+  - name: country
+    config:
+      tags: 'cc'
+    columns:
+      - name: name 
+        tests:  
+          - unique
+          - not_null
+          - accepted_values:
+              values: ['Sweden', 'Denmark', 'Norway', 'Finland']
+          - relationships:
+              to: ref('country_details')
+              field: id
+
+  - name: country_details
+    config:
+      tags: 'bb'
+    columns:
+      - name: id
+        tests:  
+          - unique
+          - not_null
+          - relationships:
+              to: ref('country')
+              field: id
+      - name: population
+        tests:
+          - not_null  
+  - name: changes
